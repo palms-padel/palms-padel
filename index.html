@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palms Padel | بادل النخيل</title>
+  <meta name="description" content="حجز ملعب Palms Padel - ملعب واحد متميز">
+  <meta name="theme-color" content="#0d3b1e">
+  <script src="https://js.stripe.com/v3/"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🌴</span>
+        <span>Palms Padel</span>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-btn active" data-page="home">الرئيسية</button>
+        <button class="nav-btn" data-page="courts">احجز الآن</button>
+        <button class="nav-btn" data-page="bookings">حجوزاتي</button>
+      </nav>
+    </header>
+
+    <div id="page-home" class="page active">
+      <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+          <div class="hero-badge">🌴 Palms Padel | بادل النخيل</div>
+          <h1>احجز ملعبك الآن</h1>
+          <p>ملعب بادل واحد متميز بتصميم احترافي وأجواء راقية</p>
+          <div class="price-tag">
+            <span class="price-new">10 ر.ع</span>
+            <span class="price-label">/ الساعة</span>
+          </div>
+          <button class="cta-btn" onclick="goToPage('courts')">احجز الآن</button>
+        </div>
+      </section>
+      <section class="features">
+        <article class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>حجز فوري</h3>
+          <p>احجز ملعبك في ثوانٍ معدودة</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>دفع آمن</h3>
+          <p>Apple Pay, Google Pay, بطاقة ائتمان</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>جدول مرن</h3>
+          <p>اختر الوقت المناسب لك</p>
+        </article>
+      </section>
+      <section class="about-section">
+        <h3>🌴 عن Palms Padel | بادل النخيل</h3>
+        <p>ملعب بادل واحد متميز يوفر لك تجربة لعب احترافية بأجواء مريحة. نحرص على أعلى معايير الجودة والنظافة لضمان أفضل تجربة لك ولرفقائك.</p>
+      </section>
+    </div>
+
+    <div id="page-courts" class="page">
+      <h2 class="page-title">ملعب Palms Padel</h2>
+      <div class="date-selector">
+        <button class="date-btn active" data-date="اليوم">اليوم<br><small id="date-0">--</small></button>
+        <button class="date-btn" data-date="غداً">غداً<br><small id="date-1">--</small></button>
+        <button class="date-btn" data-date="بعد غد">بعد غد<br><small id="date-2">--</small></button>
+      </div>
+      <article class="single-court">
+        <div class="court-hero">
+          <div class="court-visual">
+            <div class="court-surface">
+              <div class="court-line court-line-h"></div>
+              <div class="court-line court-line-v"></div>
+              <div class="court-net"></div>
+              <div class="court-ball"></div>
+            </div>
+          </div>
+          <div class="court-overlay">
+            <h2>ملعب Palms Padel</h2>
+            <div class="court-rating">⭐⭐⭐⭐⭐ (5.0)</div>
+          </div>
+        </div>
+        <div class="court-details">
+          <div class="detail-row">
+            <span class="detail-label">📍 الموقع</span>
+            <span class="detail-value">Palms Padel | بادل النخيل</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">🏟️ النوع</span>
+            <span class="detail-value">ملعب خارجي مكشوف</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">🌡️ الإضاءة</span>
+            <span class="detail-value">إضاءة LED ليلية</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">🎾 الأرضية</span>
+            <span class="detail-value">عشب صناعي عالي الجودة</span>
+          </div>
+          <div class="detail-row price-row">
+            <span class="detail-label">💰 السعر</span>
+            <span class="detail-value highlight">10 ر.ع / الساعة</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">🏷️ خصم تدريجي</span>
+            <span class="detail-value" style="color:var(--accent);">ساعتين = 9 ر.ع | 3 ساعات = 8 ر.ع</span>
+          </div>
+          <button class="book-btn-large" onclick="openBooking(1, 'ملعب Palms Padel', 10)">
+            <span>احجز الآن</span>
+            <span class="arrow">←</span>
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <div id="booking-modal" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeBookingModal()">×</button>
+        <div class="modal-header">
+          <h2 id="modal-title">حجز الملعب</h2>
+          <p class="modal-subtitle">🌴 Palms Padel</p>
+        </div>
+        <div class="booking-form">
+          <div class="form-group">
+            <label>الملعب</label>
+            <input type="text" id="court-name" readonly value="ملعب Palms Padel">
+          </div>
+          <div class="form-group">
+            <label>اختر الوقت ⏰</label>
+            <div class="time-slots">
+              <button class="time-slot" data-time="06:00">06:00 ص</button>
+              <button class="time-slot" data-time="07:00">07:00 ص</button>
+              <button class="time-slot" data-time="08:00">08:00 ص</button>
+              <button class="time-slot" data-time="09:00">09:00 ص</button>
+              <button class="time-slot" data-time="10:00">10:00 ص</button>
+              <button class="time-slot" data-time="11:00">11:00 ص</button>
+              <button class="time-slot" data-time="12:00">12:00 م</button>
+              <button class="time-slot" data-time="13:00">01:00 م</button>
+              <button class="time-slot" data-time="14:00">02:00 م</button>
+              <button class="time-slot" data-time="15:00">03:00 م</button>
+              <button class="time-slot" data-time="16:00">04:00 م</button>
+              <button class="time-slot" data-time="17:00">05:00 م</button>
+              <button class="time-slot" data-time="18:00">06:00 م</button>
+              <button class="time-slot" data-time="19:00">07:00 م</button>
+              <button class="time-slot" data-time="20:00">08:00 م</button>
+              <button class="time-slot" data-time="21:00">09:00 م</button>
+              <button class="time-slot" data-time="22:00">10:00 م</button>
+              <button class="time-slot" data-time="23:00">11:00 م</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>عدد الساعات</label>
+            <select id="hours-select">
+              <option value="1">1 ساعة (10 ر.ع)</option>
+              <option value="2">2 ساعة (18 ر.ع)</option>
+              <option value="3">3 ساعات (24 ر.ع)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>الاسم الكامل *</label>
+            <input type="text" id="customer-name" placeholder="أدخل اسمك الكامل">
+          </div>
+          <div class="form-group">
+            <label>رقم الجوال *</label>
+            <input type="tel" id="customer-phone" placeholder="05xxxxxxxx">
+          </div>
+          <div class="form-group">
+            <label>البريد الإلكتروني *</label>
+            <input type="email" id="customer-email" placeholder="email@example.com">
+          </div>
+          <div class="price-summary">
+            <div class="price-row">
+              <span>سعر الساعة</span>
+              <span id="price-per-hour">10 ر.ع</span>
+            </div>
+            <div class="price-row">
+              <span>عدد الساعات</span>
+              <span id="hours-count">1</span>
+            </div>
+            <div class="price-row total">
+              <span>الإجمالي</span>
+              <span id="total-price">10 ر.ع</span>
+            </div>
+          </div>
+          <button class="pay-btn" onclick="goToPayment()">الانتقال للدفع الإلكتروني 🔒</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="payment-modal" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closePaymentModal()">×</button>
+        <div class="modal-header">
+          <h2>إتمام الدفع الإلكتروني</h2>
+          <p class="modal-subtitle">🔒 Apple Pay · Google Pay · بطاقة ائتمان</p>
+        </div>
+        <div class="payment-summary-box">
+          <div class="summary-row">
+            <span>الملعب</span>
+            <strong id="pay-court">Palms Padel</strong>
+          </div>
+          <div class="summary-row">
+            <span>التاريخ</span>
+            <strong id="pay-date">اليوم</strong>
+          </div>
+          <div class="summary-row">
+            <span>الوقت</span>
+            <strong id="pay-time">--:--</strong>
+          </div>
+          <div class="summary-row">
+            <span>المدة</span>
+            <strong id="pay-hours">1 ساعة</strong>
+          </div>
+          <div class="summary-row total">
+            <span>المبلغ الإجمالي</span>
+            <strong id="pay-amount">10 ر.ع</strong>
+          </div>
+        </div>
+        <div id="payment-message" class="payment-message"></div>
+        <button id="submit-payment-btn" class="pay-btn stripe-pay-btn">
+          <span id="btn-text">💳 ادفع الآن عبر Stripe</span>
+          <span id="btn-spinner" class="spinner hidden"></span>
+        </button>
+        <div class="divider"><span>أو</span></div>
+        <button class="whatsapp-alt-btn" onclick="switchToWhatsApp()">
+          💬 الدفع عبر واتساب
+        </button>
+      </div>
+    </div>
+
+    <div id="success-modal" class="modal">
+      <div class="modal-content success-content">
+        <div class="success-icon">✅</div>
+        <h2>تم الحجز بنجاح!</h2>
+        <p>تم تأكيد حجزك في <strong>Palms Padel</strong>، سيتم إرسال تفاصيل الحجز إلى بريدك الإلكتروني</p>
+        <div class="booking-details" id="booking-details"></div>
+        <button class="cta-btn" onclick="closeAllModals(); goToPage('bookings')">عرض حجوزاتي</button>
+      </div>
+    </div>
+
+    <div id="page-bookings" class="page">
+      <h2 class="page-title">🌴 حجوزاتي - Palms Padel</h2>
+      <div id="bookings-list" class="bookings-list">
+        <div class="empty-state">
+          <div class="empty-icon">🌴</div>
+          <p>لا توجد حجوزات حالياً في Palms Padel</p>
+          <button class="cta-btn" onclick="goToPage('courts')">احجز ملعبك الآن</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <div class="footer-logo">🌴 Palms Padel | بادل النخيل</div>
+      <p>ملعب بادل واحد بأعلى معايير الجودة</p>
+      <p>📞 تواصل معنا: <a href="https://wa.me/96877600544">واتساب 77600544</a> | 📧 sanad.s.alhajri@gmail.com</p>
+      <a href="https://wa.me/96877600544" class="whatsapp-btn">💬 تواصل عبر واتساب</a>
+      <p class="copyright">© 2026 Palms Padel - جميع الحقوق محفوظة</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
